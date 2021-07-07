@@ -1,0 +1,12 @@
+; DO NOT EDIT (unless you know what you are doing)
+;
+; This subdirectory is a git "subrepo", and this file is maintained by the
+; git-subrepo command. See https://github.com/git-commands/git-subrepo#readme
+;
+[subrepo]
+	remote = https://github.com/waleedka/coco
+	branch = master
+	commit = f83e9552d4ca57e15a16dca2efe3dcd80693358a
+	parent = 818ed4c0d197e3b6b7baa11272c83119773cc969
+	method = merge
+	cmdver = 0.4.3
