@@ -1,1 +1,2 @@
 ipykernel
+-e src/drc_detector/Mask_RCNN
