@@ -10,7 +10,7 @@
 
 ```bash
 sudo apt install ros-noetic-desktop-full
-pip install -r requirements.txt
+python3 -m pip install -r requirements.txt
 rosdep update
 rosdep install --from-paths ./src/ --ignore-src
 catin_make

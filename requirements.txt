@@ -1,2 +1,3 @@
 ipykernel
 -e src/drc_detector/Mask_RCNN
+-e src/drc_detector/Mask_RCNN/coco/PythonAPI
