@@ -1,3 +1,4 @@
-ipykernel
--e src/drc_detector/Mask_RCNN
--e src/drc_detector/Mask_RCNN/coco/PythonAPI
+# split into 2 because the setup.py requires Cython
+rospkg
+catkin_pkg
+git+https://github.com/gautamchitnis/cocoapi.git@cocodataset-master#subdirectory=PythonAPI
