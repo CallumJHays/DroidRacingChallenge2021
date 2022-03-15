@@ -1,48 +1,39 @@
-# DroidRacingChallenge 2021
+# DroidRacingChallenge2021
 
-## Teammates:
+Team Chimera:
+- Callum Hays
+- Cameron Coombe
+- Phoenix Seybold
 
-- **Cameron Coombe**: Machine Learning & Computer Vision
-- **Callum Hays**: AI & ROS Integration
-- **Phoenix Seybold**: Electrical, Mechanical & Manufacturing
+## Setup
 
-## Setting Up
+Make sure the pinouts coming from the redboard are plugged into the drive ESC and steering Servo. (blue should go into the slightly longer lead, orange to the other. Both reds and blacks are just 5V and GND as per usual).
 
-```bash
-curl -s https://raw.githubusercontent.com/ros/rosdistro/master/ros.asc | sudo apt-key add - && \
-sudo apt update && \
-sudo apt install -y ros-melodic-desktop-full python3.7 python3.7-dev python3-pip python3.7-venv python3-yaml && \
+Log into the Jetson somehow. Via HDMI: Connect the HDMI cable and restart the jetson. A login terminal prompt should show. The login credentials are:
 
-source /opt/ros/melodic/setup.sh && \
-rosdep update && \
-rosdep install --from-paths ./src/ --ignore-src -y && \
-
-source ./venv/bin/activate && \
-pip install --upgrade pip && \
-python3 -m pip install --force-reinstall numpy Cython && \
-python3 -m pip install -r requirements.txt && \
-
-export ROS_PYTHON_VERSION=3
+```
+username: champ
+password: grindyboy
 ```
 
-If you get a "fatal error: xlocale.h: No such file or directory" (happened to me on an arm64 device), run this:
-```bash
-sudo ln -s /usr/include/locale.h /usr/include/xlocale.h
+The program relies on being connected to a Wifi network. To edit the wifi network config, run `sudo vim /etc/NetworkManager/system-connections` and then `sudo service NetworkManager restart` to load the config. If successful, running `ip address` and looking at the last one (`wlan0`) will show your IP address on the network (if you're connected).
+
+
+## Running
+
+Get the wifi address of the robot by running `ip address` and looking for `wlan0`.
+
+Run the program with:
+
+```
+cd ~/DroidRacingChallenge2021
+zsh run.sh
 ```
 
-Then build it:
+You should then be able to access the web interface at `<IP ADDR>:8080`. After a little while the interface should show with live-streams coming from the robot. The wheels should be turning as it detects various obstacles.
 
-```bash
-catkin_make
-```
+You can tune any parameter in the algorithm by modifying the sliders/checkboxes/dropdowns on the left.
 
-## Jetson Nano
+The robot starts with the drives turned off. To turn them on, check the `diffsteer.go` checkbox in the parameter pane on the left.
 
-You need to ensure that the PWM outputs are enabled. To do this (on the latest supported image based on 18.04), run:
-```bash
-sudo /opt/nvidia/jetson-io/jetson-io.py
-```
-
-**NOTE**: You will have to **RESTART** to do this, so be prepared to.
-
-Select "Configure 40-pin expansion header" and then toggle both pwm pins. Then ensure you "Save and reboot to reconfigure pins".
+Now the robot should be running. You may need to tune the thresholding values in order for the bot to recognize lines and obstacles properly. Good luck!
